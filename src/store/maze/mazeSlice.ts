@@ -44,8 +44,8 @@ const initialState: MazeState = {
     avatar: {
         x: 1,
         y: 0,
-    }
-}
+    },
+};
 
 export const mazeSlice = createSlice({
     name: 'maze',
@@ -61,10 +61,10 @@ export const mazeSlice = createSlice({
             state.finished = initialState.finished;
         },
         increment: (state) => {
-            state.moves += 1
+            state.moves += 1;
         },
         endGame: (state) => {
-            state.moves += 1
+            state.finished = true;
         },
         moveAvatar: (state, action: PayloadAction<string>) => {
             switch (action.payload) {
