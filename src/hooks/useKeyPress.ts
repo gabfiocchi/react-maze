@@ -39,6 +39,13 @@ const checkEndGame = (avatar: Position, end: Position) => {
     return row === end.x && col === end.y;
 }
 
+const playAudio = (id: string) => {
+    const audio = (document.getElementById(id) as HTMLAudioElement);
+    audio.pause();
+    audio.currentTime = 0;
+    audio.play();
+}
+
 const useKeyPress = (targetKey: string) => {
     const dispatch = useAppDispatch();
 
@@ -81,16 +88,16 @@ const useKeyPress = (targetKey: string) => {
 
             const isEndGame = checkEndGame(newAvatarPosition, end);
             if (isEndGame) {
-                (document.getElementById('winGame') as HTMLAudioElement)?.play();
+                playAudio('winGame');
                 dispatch(endGame());
             }
             if (checkCollision(newAvatarPosition, maze) && !isEndGame) {
-                (document.getElementById('buttonPressWrong') as HTMLAudioElement)?.play();
+                playAudio('buttonPressWrong');
                 return false;
             }
 
             if (!finished) {
-                (document.getElementById('buttonPress') as HTMLAudioElement)?.play();
+                playAudio('buttonPress');
                 dispatch(increment());
                 dispatch(moveAvatar(moveTo));
             }
