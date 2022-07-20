@@ -13,7 +13,7 @@ const GoCookCard: React.FC = () => {
             </p>
 
             <a
-                className="inline-flex items-center py-2 px-4 text-sm text-center text-white bg-black rounded-full mt-8 mr-auto font-extrabold"
+                className="inline-flex items-center py-2 px-4 text-sm text-center text-white bg-black rounded-full mt-8 mr-auto font-extrabold hover:bg-slate-800 focus:ring-2 focus:outline-none focus:ring-slate-300"
                 href="https://cookunity.com/our-menu" target="_blank" rel="noreferrer"
                 title="View our menu">
                 View our menu

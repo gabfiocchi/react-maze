@@ -21,7 +21,7 @@ const EndGameBanner: React.FC = () => {
                 </p>
             </div>
             <button onClick={() => dispatch(restart())}
-                className="inline-flex items-center py-2 px-4 mt-6 text-sm text-center text-white bg-black rounded-full m-auto font-extrabold"
+                className="inline-flex items-center py-2 px-4 mt-6 text-sm text-center text-white bg-black rounded-full m-auto font-extrabold hover:bg-slate-800 focus:ring-2 focus:outline-none focus:ring-slate-300"
             >
                 Restart game
             </button>

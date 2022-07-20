@@ -51,7 +51,13 @@ const useKeyPress = (targetKey: string) => {
     // State for keeping track of whether key is pressed
     const [keyPressed, setKeyPressed] = useState<boolean>(false);
     // If pressed key is our target key then set to true
-    const downHandler = ({ key }: KeyboardEvent) => {
+    const downHandler = (event: KeyboardEvent) => {
+        const { key } = event;
+
+        if (key.includes('Arrow')) {
+            event.preventDefault();
+        }
+
         if (key === targetKey) {
             let moveTo = '';
             switch (key) {
@@ -82,6 +88,7 @@ const useKeyPress = (targetKey: string) => {
             }
 
             if (!finished) {
+                new Audio('/assets/sounds/button-press.wav').play();
                 dispatch(increment());
                 dispatch(moveAvatar(moveTo));
             }

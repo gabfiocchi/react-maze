@@ -7,7 +7,10 @@ const StartGameBanner: React.FC = () => {
     const dispatch = useAppDispatch();
     return (
         <div className="flex flex-col w-full my-14">
-            <button className="inline-flex items-center py-2 px-4 text-sm text-center text-white bg-black rounded-full m-auto font-extrabold" onClick={() => dispatch(loaded(true))}>
+            <button
+                onClick={() => dispatch(loaded(true))}
+                className="inline-flex items-center py-2 px-4 text-sm text-center text-white bg-black rounded-full m-auto font-extrabold hover:bg-slate-800 focus:ring-2 focus:outline-none focus:ring-slate-300"
+            >
                 Start game
                 <ChevronRight />
             </button>

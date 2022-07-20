@@ -31,13 +31,11 @@ const App: React.FC = () => {
       </div>
       <div className="flex flex-col p-6 bg-white rounded-lg border border-gray-200 shadow-md w-full">
         {isLoaded && !isFinished && <MazeGrid />}
-        {isLoaded && <Pad />}
+        {isLoaded && !isFinished && <Pad />}
         {!isLoaded && <StartGameBanner />}
         {isFinished && <EndGameBanner />}
       </div>
       <GoCookCard />
-      {/* dark: */}
-      {/* hover: */}
     </main>
   );
 };
