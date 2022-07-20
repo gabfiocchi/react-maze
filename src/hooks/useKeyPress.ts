@@ -81,16 +81,16 @@ const useKeyPress = (targetKey: string) => {
 
             const isEndGame = checkEndGame(newAvatarPosition, end);
             if (isEndGame) {
-                new Audio('/assets/sounds/win-game.wav').play();
+                (document.getElementById('winGame') as HTMLAudioElement)?.play();
                 dispatch(endGame());
             }
             if (checkCollision(newAvatarPosition, maze) && !isEndGame) {
-                new Audio('/assets/sounds/button-press-wrong.wav').play();
+                (document.getElementById('buttonPressWrong') as HTMLAudioElement)?.play();
                 return false;
             }
 
             if (!finished) {
-                new Audio('/assets/sounds/button-press.wav').play();
+                (document.getElementById('buttonPress') as HTMLAudioElement)?.play();
                 dispatch(increment());
                 dispatch(moveAvatar(moveTo));
             }

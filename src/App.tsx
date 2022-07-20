@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.scss';
+import AudioGame from './components/audioGame/audioGame';
 import EndGameBanner from './components/endGameBanner/endGameBanner';
 import GoCookCard from './components/goCookCard/goCookCard';
 import MazeGrid from './components/mazeGrid/mazeGrid';
@@ -35,7 +36,8 @@ const App: React.FC = () => {
         {!isLoaded && <StartGameBanner />}
         {isFinished && <EndGameBanner />}
       </div>
-      <GoCookCard />
+      {isFinished && <GoCookCard />}
+      <AudioGame />
     </main>
   );
 };
