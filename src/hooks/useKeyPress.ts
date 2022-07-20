@@ -1,44 +1,53 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
-import { increment, moveAvatar, Position } from "../store/maze/mazeSlice";
+import { endGame, increment, moveAvatar, Position } from "../store/maze/mazeSlice";
 import { useAppDispatch } from "./useAppState";
-
-const checkCollision = (moveTo: string, avatar: Position, maze: number[][]) => {
-    console.log('moveTo', moveTo);
+const getNewPosition = (moveTo: string, avatar: Position) => {
     let { x, y } = avatar;
-    console.log('avatar', avatar, x, y);
-
     switch (moveTo) {
-        case 'ArrowUp':
+        case 'up':
             y -= 1;
             break;
-        case 'ArrowDown':
+        case 'down':
             y += 1;
             break;
-        case 'ArrowLeft':
+        case 'left':
             x -= 1;
             break;
-        case 'ArrowRight':
+        case 'right':
             x += 1;
             break;
         default:
             break;
     }
-
-    const [row, col] = [y, x];
+    return { x, y };
+}
+const checkCollision = (avatar: Position, maze: number[][]) => {
+    const { y: row, x: col } = avatar;
+    if (row < 0 || col < 0) {
+        return true;
+    }
     const cell = maze[row][col];
 
-    console.log('cell', cell);
     return cell === 1;
+}
+
+const checkEndGame = (avatar: Position, end: Position) => {
+    const { x: row, y: col } = avatar;
+    console.log(row, col, end, row === end.x && col === end.y)
+
+    return row === end.x && col === end.y;
 }
 
 const useKeyPress = (targetKey: string) => {
     const dispatch = useAppDispatch();
-    // const appearance = useSelector((state) => state.application?.appearance);
-    const { avatar, maze } = useSelector((state: RootState) => ({
+
+    const { avatar, maze, end, finished } = useSelector((state: RootState) => ({
         avatar: state.maze.avatar,
-        maze: state.maze.maze
+        maze: state.maze.maze,
+        end: state.maze.end,
+        finished: state.maze.finished,
     }));
     // State for keeping track of whether key is pressed
     const [keyPressed, setKeyPressed] = useState<boolean>(false);
@@ -46,7 +55,6 @@ const useKeyPress = (targetKey: string) => {
     const downHandler = ({ key }: KeyboardEvent) => {
         if (key === targetKey) {
             let moveTo = '';
-            console.log('downHandler', key);
             switch (key) {
                 case 'ArrowUp':
                     moveTo = 'up';
@@ -64,15 +72,22 @@ const useKeyPress = (targetKey: string) => {
                     break;
             }
 
+            const newAvatarPosition = getNewPosition(moveTo, avatar);
 
-            if (checkCollision(moveTo, avatar, maze)) {
+            const isEndGame = checkEndGame(newAvatarPosition, end);
+            if (isEndGame) {
+                dispatch(endGame());
+            }
+            if (checkCollision(newAvatarPosition, maze) && !isEndGame) {
                 return false;
             }
 
-            dispatch(increment());
-            setKeyPressed(true);
+            if (!finished) {
+                dispatch(increment());
+                dispatch(moveAvatar(moveTo));
+            }
 
-            dispatch(moveAvatar(moveTo));
+            setKeyPressed(true);
 
         }
     }
@@ -91,7 +106,7 @@ const useKeyPress = (targetKey: string) => {
             window.removeEventListener('keydown', downHandler);
             window.removeEventListener('keyup', upHandler);
         };
-    }, []); // Empty array ensures that effect is only run on mount and unmount
+    }, [avatar, maze, finished]); // Empty array ensures that effect is only run on mount and unmount
     return keyPressed;
 }
 export default useKeyPress;

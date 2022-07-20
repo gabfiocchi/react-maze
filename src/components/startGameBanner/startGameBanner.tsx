@@ -6,7 +6,7 @@ import ChevronRight from '../chevronRight/chevronRight';
 const StartGameBanner: React.FC = () => {
     const dispatch = useAppDispatch();
     return (
-        <div className="flex flex-col w-full">
+        <div className="flex flex-col w-full mt-6">
             <button className="inline-flex items-center py-2 px-4 text-sm text-center text-white bg-black rounded-full m-auto font-extrabold" onClick={() => dispatch(loaded(true))}>
                 Start game
                 <ChevronRight />

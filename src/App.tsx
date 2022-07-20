@@ -2,18 +2,22 @@ import React from 'react';
 import './App.scss';
 import MazeGrid from './components/mazeGrid/mazeGrid';
 import StartGameBanner from './components/startGameBanner/startGameBanner';
-import { useAppSelector } from './hooks/useAppState';
+import { useAppDispatch, useAppSelector } from './hooks/useAppState';
 import useKeyPress from './hooks/useKeyPress';
 import { RootState } from './store';
+import { restart } from './store/maze/mazeSlice';
 
 const App: React.FC = () => {
-  // TODO: Log remove
-  const avatar = useAppSelector((state: RootState) => state.maze.avatar);
-  const moves = useAppSelector((state: RootState) => state.maze.moves);
+  const { isLoaded, moves, isFinished } = useAppSelector((state: RootState) => ({
+    isLoaded: state.maze.loaded,
+    moves: state.maze.moves,
+    isFinished: state.maze.finished,
+  }));
   const ArrowUp = useKeyPress('ArrowUp');
   const ArrowDown = useKeyPress('ArrowDown');
   const ArrowRight = useKeyPress('ArrowRight');
   const ArrowLeft = useKeyPress('ArrowLeft');
+  const dispatch = useAppDispatch();
 
   return (
     // bg-neutral-100 
@@ -26,12 +30,15 @@ const App: React.FC = () => {
       </div>
       <div className="flex flex-col p-6 bg-white rounded-lg border border-gray-200 shadow-md w-full">
         <MazeGrid />
-        <span className='mb-6'></span>
-        <StartGameBanner />
+        
+        {!isLoaded && <StartGameBanner />}
+        {isLoaded && moves > 0 && <button className="inline-flex items-center py-2 px-4 mt-6 text-sm text-center text-white bg-black rounded-full m-auto font-extrabold" onClick={() => dispatch(restart())}>
+          Reset game
+        </button>}
       </div>
       <div>
-        {avatar.x}
-        {avatar.y}
+      {isLoaded}
+      {isFinished}
         {ArrowUp && "⬆️"}
         {ArrowDown && "⬇️"}
         {ArrowRight && "➡️"}
