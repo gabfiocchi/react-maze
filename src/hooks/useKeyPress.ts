@@ -81,9 +81,11 @@ const useKeyPress = (targetKey: string) => {
 
             const isEndGame = checkEndGame(newAvatarPosition, end);
             if (isEndGame) {
+                new Audio('/assets/sounds/win-game.wav').play();
                 dispatch(endGame());
             }
             if (checkCollision(newAvatarPosition, maze) && !isEndGame) {
+                new Audio('/assets/sounds/button-press-wrong.wav').play();
                 return false;
             }
 
