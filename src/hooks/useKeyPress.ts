@@ -35,7 +35,6 @@ const checkCollision = (avatar: Position, maze: number[][]) => {
 
 const checkEndGame = (avatar: Position, end: Position) => {
     const { x: row, y: col } = avatar;
-    console.log(row, col, end, row === end.x && col === end.y)
 
     return row === end.x && col === end.y;
 }

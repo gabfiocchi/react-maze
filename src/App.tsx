@@ -29,16 +29,14 @@ const App: React.FC = () => {
         </p>
       </div>
       <div className="flex flex-col p-6 bg-white rounded-lg border border-gray-200 shadow-md w-full">
-        <MazeGrid />
-        
+        {isLoaded && <MazeGrid />}
+
         {!isLoaded && <StartGameBanner />}
         {isLoaded && moves > 0 && <button className="inline-flex items-center py-2 px-4 mt-6 text-sm text-center text-white bg-black rounded-full m-auto font-extrabold" onClick={() => dispatch(restart())}>
           Reset game
         </button>}
       </div>
       <div>
-      {isLoaded}
-      {isFinished}
         {ArrowUp && "⬆️"}
         {ArrowDown && "⬇️"}
         {ArrowRight && "➡️"}
