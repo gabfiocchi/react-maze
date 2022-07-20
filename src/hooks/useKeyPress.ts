@@ -41,8 +41,8 @@ const checkEndGame = (avatar: Position, end: Position) => {
 
 const playAudio = (id: string) => {
     const audio = (document.getElementById(id) as HTMLAudioElement);
-    audio.pause();
     audio.currentTime = 0;
+    audio.muted = false;
     audio.play();
 }
 
