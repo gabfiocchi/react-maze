@@ -1,6 +1,48 @@
-# Getting Started with Create React App
+# CookUnity - Maze Challenge
+
+[Live demo](https://react-maze-henna.vercel.app/)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+For the test I created the Maze Game, in which I used the following development stack.
+
+- Typescript
+- React
+- Redux for the application state management
+- Tailwind CSS for the UI
+- Testing Library for testing app and components
+- Vercel for deployed app.
+- NVM for the version management of Node.js
+
+*Remember to turn on the speakers for a better experience.
+
+# How does it work?
+
+The Hook `useKeyPress` is in charge of listening to the arrow keys on the keyboard or Mini Pad.
+
+The structure I have chosen is to group the files by their functionality: inside the `./src/` we have `components, hooks, store and utils`. 
+
+As for the public resources part `./public/assets/` we have `fonts, images and sounds`.
+
+
+```
+project
+│   README.md
+│   ...
+└─── public
+│   │   ...
+│   └─── assets
+│           └─── fonts
+│           └─── images
+│           └─── sounds
+│   
+└─── src
+    └─── components
+    └─── hooks
+    └─── store
+    └─── utils
+```
+
 
 ## Available Scripts
 
@@ -39,8 +81,3 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).

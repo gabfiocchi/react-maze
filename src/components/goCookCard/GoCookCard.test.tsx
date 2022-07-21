@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import GoCookCard from './GoCookCard';
 
 
-test('renders react app', () => {
+test('GoCookCard render', () => {
     render(<GoCookCard />);
     const title = screen.getByText(/hungry/i);
 

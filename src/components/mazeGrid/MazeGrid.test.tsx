@@ -4,7 +4,11 @@ import { increment, initialMazeState } from '../../store/maze/mazeSlice';
 import { renderWithProviders } from '../../utils/test-utils';
 import MazeGrid from './MazeGrid';
 
-
+const mockUseAppDispatch = jest.fn();
+jest.mock('../../hooks/useAppState', () => ({
+    ...jest.requireActual('../../hooks/useAppState'),
+    useAppDispatch: () => mockUseAppDispatch,
+}));
 test('MazeGrid initial state', () => {
     renderWithProviders(
         <MazeGrid />,
@@ -16,8 +20,6 @@ test('MazeGrid initial state', () => {
     );
 
     expect(screen.queryByText(/restart game/i)).not.toBeInTheDocument();
-    // TODO: add dispatch mock test?
-    // TODO: add MazeRow component rendered?
 });
 
 test('MazeGrid render Restart Game button', async () => {
@@ -44,6 +46,6 @@ test('MazeGrid render Restart Game button', async () => {
     expect(title.textContent).toBe('Restart game');
 
     fireEvent.click(screen.getByText('Restart game'));
-    // TODO: add dispatch mock test?
-    // TODO: add MazeRow component rendered?
+    expect(mockUseAppDispatch).toHaveBeenCalledTimes(1);
+    expect(mockUseAppDispatch).toHaveBeenCalledWith({ payload: undefined, type: 'maze/restart' });
 });

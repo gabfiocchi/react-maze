@@ -1,50 +1,9 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
-import { endGame, increment, moveAvatar, Position } from "../store/maze/mazeSlice";
+import { endGame, increment, moveAvatar } from "../store/maze/mazeSlice";
+import { checkCollision, checkEndGame, getNewPosition, playAudio } from "../utils/maze-utils";
 import { useAppDispatch } from "./useAppState";
-const getNewPosition = (moveTo: string, avatar: Position) => {
-    let { x, y } = avatar;
-    switch (moveTo) {
-        case 'up':
-            y -= 1;
-            break;
-        case 'down':
-            y += 1;
-            break;
-        case 'left':
-            x -= 1;
-            break;
-        case 'right':
-            x += 1;
-            break;
-        default:
-            break;
-    }
-    return { x, y };
-}
-const checkCollision = (avatar: Position, maze: number[][]) => {
-    const { y: row, x: col } = avatar;
-    if (row < 0 || col < 0) {
-        return true;
-    }
-    const cell = maze[row][col];
-
-    return cell === 1;
-}
-
-const checkEndGame = (avatar: Position, end: Position) => {
-    const { x: row, y: col } = avatar;
-
-    return row === end.x && col === end.y;
-}
-
-const playAudio = (id: string) => {
-    const audio = (document.getElementById(id) as HTMLAudioElement);
-    audio.currentTime = 0;
-    audio.muted = false;
-    audio.play();
-}
 
 const useKeyPress = (targetKey: string) => {
     const dispatch = useAppDispatch();
@@ -66,21 +25,7 @@ const useKeyPress = (targetKey: string) => {
         }
 
         if (key === targetKey) {
-            let moveTo = '';
-            switch (key) {
-                case 'ArrowUp':
-                    moveTo = 'up';
-                    break;
-                case 'ArrowDown':
-                    moveTo = 'down';
-                    break;
-                case 'ArrowLeft':
-                    moveTo = 'left';
-                    break;
-                case 'ArrowRight':
-                    moveTo = 'right';
-                    break;
-            }
+            let moveTo = key.toLowerCase().replace(/arrow/i, '');
 
             const newAvatarPosition = getNewPosition(moveTo, avatar);
 

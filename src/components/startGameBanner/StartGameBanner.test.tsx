@@ -3,8 +3,13 @@ import { initialMazeState } from '../../store/maze/mazeSlice';
 import { renderWithProviders } from '../../utils/test-utils';
 import StartGameBanner from './StartGameBanner';
 
+const mockUseAppDispatch = jest.fn();
+jest.mock('../../hooks/useAppState', () => ({
+    ...jest.requireActual('../../hooks/useAppState'),
+    useAppDispatch: () => mockUseAppDispatch,
+}));
 
-test('renders react app', () => {
+test('StartGameBanner render Start Game button', () => {
     renderWithProviders(<StartGameBanner />, {
         preloadedState: {
             maze: initialMazeState,
@@ -16,5 +21,6 @@ test('renders react app', () => {
     expect(startButton.textContent).toBe('Start game');
 
     fireEvent.click(startButton);
-    // TODO: add dispatch mock called in StartGameBanner
+    expect(mockUseAppDispatch).toHaveBeenCalledTimes(1);
+    expect(mockUseAppDispatch).toHaveBeenCalledWith({ payload: true, type: 'maze/loaded' });
 });

@@ -11,6 +11,7 @@ const MazeCell: React.FC<MazeCellProps> = ({ cell, positionX, positionY }: MazeC
     const avatar = useAppSelector((state: RootState) => state.maze.avatar);
     return (
         <div
+            data-testid="maze-cell"
             className={`aspect-square border-0.55 border-white flex-1 flex items-center text-transparent justify-center ${cell === 1 ? 'bg-black' : 'bg-white'}`}
         >
             {

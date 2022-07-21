@@ -1,6 +1,12 @@
 import { fireEvent, queryByAttribute, render } from '@testing-library/react';
 import Pad from './Pad';
 
+const mockUseAppDispatch = jest.fn();
+jest.mock('../../hooks/useAppState', () => ({
+    ...jest.requireActual('../../hooks/useAppState'),
+    useAppDispatch: () => mockUseAppDispatch,
+}));
+
 const getById = queryByAttribute.bind(null, 'id');
 
 
@@ -11,8 +17,6 @@ test('Pad initial state', () => {
     expect(getById(view.container, 'ArrowLeft')).toBeInTheDocument();
     expect(getById(view.container, 'ArrowRight')).toBeInTheDocument();
     expect(getById(view.container, 'ArrowDown')).toBeInTheDocument();
-    // TODO: add dispatch mock test?
-    // TODO: add MazeRow component rendered?
 });
 
 test('Pad press button', () => {
