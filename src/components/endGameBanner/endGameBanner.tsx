@@ -8,9 +8,12 @@ const EndGameBanner: React.FC = () => {
 
     const moves = useAppSelector((state: RootState) => state.maze.moves);
 
+    const restartGame = () => {
+        dispatch(restart());
+    };
+
     return (
         <div className="flex flex-col w-full my-4">
-            {/* my-14 */}
             <img className="w-32 m-auto mb-6" src="/assets/images/complete.gif" alt="" />
             <div className="text-center">
                 <h3 className="text-xl font-extrabold">
@@ -20,7 +23,7 @@ const EndGameBanner: React.FC = () => {
                     You have completed the maze in <span className="font-extrabold text-green-400">{moves}</span> moves
                 </p>
             </div>
-            <button onClick={() => dispatch(restart())}
+            <button onClick={restartGame}
                 className="inline-flex items-center py-2 px-4 mt-6 text-sm text-center text-white bg-black rounded-full m-auto font-extrabold hover:bg-slate-800 focus:ring-2 focus:outline-none focus:ring-slate-300"
             >
                 Restart game

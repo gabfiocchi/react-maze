@@ -1,5 +1,5 @@
 import React from 'react';
-import MazeCell from '../mazeCell/mazeCell';
+import MazeCell from '../MazeCell/MazeCell';
 
 interface MazeRowProps {
     row: number[];

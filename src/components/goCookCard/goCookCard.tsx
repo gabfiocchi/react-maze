@@ -1,6 +1,6 @@
-import './goCookCard.scss';
 import React from 'react';
-import ChevronRight from '../chevronRight/chevronRight';
+import ChevronRight from '../ChevronRight/ChevronRight';
+import './GoCookCard.scss';
 
 const GoCookCard: React.FC = () => {
     return (

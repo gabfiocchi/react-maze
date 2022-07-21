@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.scss';
-import AudioGame from './components/audioGame/audioGame';
-import EndGameBanner from './components/endGameBanner/endGameBanner';
-import GoCookCard from './components/goCookCard/goCookCard';
-import MazeGrid from './components/mazeGrid/mazeGrid';
-import Pad from './components/pad/pad';
-import StartGameBanner from './components/startGameBanner/startGameBanner';
+import AudioGame from './components/AudioGame/AudioGame';
+import EndGameBanner from './components/EndGameBanner/EndGameBanner';
+import GoCookCard from './components/GoCookCard/GoCookCard';
+import MazeGrid from './components/MazeGrid/MazeGrid';
+import Pad from './components/Pad/Pad';
+import StartGameBanner from './components/StartGameBanner/StartGameBanner';
 import { useAppSelector } from './hooks/useAppState';
 import useKeyPress from './hooks/useKeyPress';
 import { RootState } from './store';
@@ -22,7 +22,6 @@ const App: React.FC = () => {
   useKeyPress('ArrowLeft');
 
   return (
-    // bg-neutral-100 
     <main className="flex flex-col align-center justify-center max-w-md m-auto pt-10 px-4 md:px-0">
       <div className="flex items-baseline justify-between mb-4">
         <h2 className="text-2xl font-extrabold">Maze game</h2>

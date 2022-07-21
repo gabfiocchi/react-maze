@@ -15,7 +15,7 @@ export interface MazeState {
     avatar: Position;
 }
 
-const initialState: MazeState = {
+export const initialMazeState: MazeState = {
     moves: 0,
     finished: false,
     maze: [
@@ -49,16 +49,16 @@ const initialState: MazeState = {
 
 export const mazeSlice = createSlice({
     name: 'maze',
-    initialState,
+    initialState: initialMazeState,
     reducers: {
         loaded: (state, action: PayloadAction<boolean>) => {
             state.loaded = action.payload;
         },
         restart: (state) => {
-            state.avatar = initialState.avatar;
-            state.moves = initialState.moves;
-            state.maze = initialState.maze;
-            state.finished = initialState.finished;
+            state.avatar = initialMazeState.avatar;
+            state.moves = initialMazeState.moves;
+            state.maze = initialMazeState.maze;
+            state.finished = initialMazeState.finished;
         },
         increment: (state) => {
             state.moves += 1;
@@ -79,8 +79,6 @@ export const mazeSlice = createSlice({
                     break;
                 case 'right':
                     state.avatar.x += 1;
-                    break;
-                default:
                     break;
             }
         }

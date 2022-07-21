@@ -80,8 +80,6 @@ const useKeyPress = (targetKey: string) => {
                 case 'ArrowRight':
                     moveTo = 'right';
                     break;
-                default:
-                    break;
             }
 
             const newAvatarPosition = getNewPosition(moveTo, avatar);

@@ -2,7 +2,7 @@ import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/useAppState';
 import { RootState } from '../../store';
 import { restart } from '../../store/maze/mazeSlice';
-import MazeRow from '../mazeRow/mazeRow';
+import MazeRow from '../MazeRow/MazeRow';
 
 const MazeGrid: React.FC = () => {
     const { maze, moves } = useAppSelector((state: RootState) => ({

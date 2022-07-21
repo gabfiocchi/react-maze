@@ -1,16 +1,17 @@
+/* istanbul ignore file */
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import App from './App';
-import Header from './components/header/header';
+import Header from './components/Header/Header';
 import './index.scss';
 import reportWebVitals from './reportWebVitals';
-import { store } from './store';
+import { setupStore } from './store';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
-  <Provider store={store}>
+  <Provider store={setupStore()}>
     <Header />
     <App />
   </Provider>,

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAppDispatch } from '../../hooks/useAppState';
 import { loaded } from '../../store/maze/mazeSlice';
-import ChevronRight from '../chevronRight/chevronRight';
+import ChevronRight from '../ChevronRight/ChevronRight';
 
 const StartGameBanner: React.FC = () => {
     const dispatch = useAppDispatch();
