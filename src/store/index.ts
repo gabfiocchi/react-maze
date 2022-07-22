@@ -1,18 +1,18 @@
 import { combineReducers, configureStore, PreloadedState } from '@reduxjs/toolkit';
+import { mockyApi } from '../services/api';
 import mazeReducer from './maze/mazeSlice';
-// export const AppStore = configureStore({
-//     reducer: {
-//         maze: mazeReducer,
-//     },
-// });
+
 // Create the root reducer separately so we can extract the RootState type
 const rootReducer = combineReducers({
-    maze: mazeReducer
+    maze: mazeReducer,
+    [mockyApi.reducerPath]: mockyApi.reducer,
+
 })
 
 export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
     return configureStore({
         reducer: rootReducer,
+        middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(mockyApi.middleware),
         preloadedState
     })
 }

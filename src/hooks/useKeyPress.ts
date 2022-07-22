@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { useSendSolveMovesMutation } from "../services/api";
 import { RootState } from "../store";
 import { endGame, increment, moveAvatar } from "../store/maze/mazeSlice";
 import { checkCollision, checkEndGame, getNewPosition, playAudio } from "../utils/maze-utils";
@@ -8,12 +9,16 @@ import { useAppDispatch } from "./useAppState";
 const useKeyPress = (targetKey: string) => {
     const dispatch = useAppDispatch();
 
-    const { avatar, maze, end, finished } = useSelector((state: RootState) => ({
+    const { avatar, maze, end, finished, moves } = useSelector((state: RootState) => ({
         avatar: state.maze.avatar,
         maze: state.maze.maze,
         end: state.maze.end,
         finished: state.maze.finished,
+        moves: state.maze.moves,
     }));
+    //   const [updatePost, { isLoading: isUpdating }] = useUpdatePostMutation()
+
+    const [updatePost] = useSendSolveMovesMutation();
     // State for keeping track of whether key is pressed
     const [keyPressed, setKeyPressed] = useState<boolean>(false);
     // If pressed key is our target key then set to true
@@ -31,6 +36,10 @@ const useKeyPress = (targetKey: string) => {
 
             const isEndGame = checkEndGame(newAvatarPosition, end);
             if (isEndGame) {
+                updatePost({
+                    id: '5df38f523100006d00b58560',
+                    moves,
+                });
                 playAudio('winGame');
                 dispatch(endGame());
             }

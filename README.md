@@ -20,7 +20,7 @@ For the test I created the Maze Game, in which I used the following development 
 
 The Hook `useKeyPress` is in charge of listening to the arrow keys on the keyboard or Mini Pad.
 
-The structure I have chosen is to group the files by their functionality: inside the `./src/` we have `components, hooks, store and utils`. 
+The structure I have chosen is to group the files by their functionality: inside the `./src/` we have `components, hooks, services, store and utils`. 
 
 As for the public resources part `./public/assets/` we have `fonts, images and sounds`.
 
@@ -39,6 +39,7 @@ project
 └─── src
     └─── components
     └─── hooks
+    └─── services
     └─── store
     └─── utils
 ```
